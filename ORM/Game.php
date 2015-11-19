@@ -38,7 +38,7 @@ class game{
 		$result = $mysqli->query("REPLACE into Game values(0,'$Team1','$Team2','$Team1_score','$Team2_score','$game_time')"); 
 		if($result){
 			$id = $mysqli->insert_id;
-			return new Game($id, $Team1, $Team2, $Team1_score, $Team2_score, $game_time);
+			return new game($id, $Team1, $Team2, $Team1_score, $Team2_score, $game_time);
 		}else{
 			printf("SQL error: %s\n", $mysqli->error);
 		}

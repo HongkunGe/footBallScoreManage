@@ -30,20 +30,33 @@ class event{
 		}
 		
 		// $player_id, $game_id are foreign keys of event table which are correlated with player and game.
-		$Team1 = $mysqli->real_escape_string($Team1);
-		$Team2 = $mysqli->real_escape_string($Team2);
-		
-		$rushing = $mysqli->real_escape_string($rushing);
-		$passing = $mysqli->real_escape_string($passing);
-		$fieldgoal = $mysqli->real_escape_string($fieldgoal);
-		
-		// may have problem. how to add id.
-		$result = $mysqli->query("REPLACE into Game values(0,'$Team1','$Team2','$Team1_score','$Team2_score','$game_time')"); 
+		$result = $mysqli->query("REPLACE into Event values(0,'$player_id','$game_id','$rushing','$passing','$fieldgoal', '$passTo')"); 
 		if($result){
 			$id = $mysqli->insert_id;
-			return new Game($id, $Team1, $Team2, $Team1_score, $Team2_score, $game_time);
+			return new event($id, $player_id, $game_id, $rushing, $passing, $fieldgoal, $passTo);
 		}else{
 			printf("SQL error: %s\n", $mysqli->error);
+		}
+		return null;
+	}
+	
+	public static function update($player_id, $game_id, $rushing, $passing, $fieldgoal, $passTo){
+		$mysqli = new mysqli("classroom.cs.unc.edu", "hongkun", "CH@ngemenow99Please!hongkun", "hongkundb");
+		
+		/*check the connection*/
+		if(mysqli_connect_errno()){
+			printf("Connection failed: %s\n", mysqli_connect_errno);
+			exit();
+		}
+		
+		$result = $mysqli->query("UPDATE Event " . 
+									"SET rushing = rushing + '$rushing', passing = passing + '$passing', fieldgoal = fieldgoal + '$fieldgoal', passTo = '$passTo' " .
+									"WHERE p_id = '$player_id' AND g_id = '$game_id' "); 
+		if($result){
+			$id = $mysqli->insert_id;
+			return new event($id, $player_id, $game_id, $rushing, $passing, $fieldgoal, $passTo);
+		}else{
+			printf("SQL Update error: %s\n", $mysqli->error);
 		}
 		return null;
 	}
