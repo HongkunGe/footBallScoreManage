@@ -27,14 +27,12 @@ class game{
 			exit();
 		}
 		
-		// $player_id = $mysqli->real_escape_string($player_id);
 		$Team1 = $mysqli->real_escape_string($Team1);
 		$Team2 = $mysqli->real_escape_string($Team2);
 		$Team1_score = $mysqli->real_escape_string($Team1_score);
 		$Team2_score = $mysqli->real_escape_string($Team2_score);
 		$game_time = $mysqli->real_escape_string($game_time);
 		
-		// may have problem. how to add id.
 		$result = $mysqli->query("REPLACE into Game values(0,'$Team1','$Team2','$Team1_score','$Team2_score','$game_time')"); 
 		if($result){
 			$id = $mysqli->insert_id;
