@@ -33,6 +33,9 @@ $all_game_data = explode("\n", $all_game_data);
 // insert to Player table.
 $length = count($all_game_data);
 
+
+// $team_before = [$game_i[2] => 0, $game_i[3] => 0, $game_i[4]];
+
 for($i = 0; $i < $length - 1; $i++){
 	$game_i =  explode(" ", $all_game_data[$i]);
 
@@ -84,6 +87,14 @@ for($i = 0; $i < $length - 1; $i++){
 		// update the table.
 		$result = event::update($player_id, $game_id, $cnt["rushing"], $cnt["passing"], $cnt["fieldgoal"], $cnt["passTo"]);
 	}
+	
+	$event_id = $result->event_id;
+	$player_id = $result->player_id;
+	$game_id = $result->game_id;
+	printf("insert Event " . "$event_id: " . "$player_id". " and ". "$game_id". " succeeded!");
+	?>
+	<br>
+	<?php
 }
 ?>
 

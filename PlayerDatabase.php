@@ -30,6 +30,7 @@ $length = count($all_game_data);
 for($i = 0; $i < $length - 1; $i++){
 	$player_i =  explode(" ", $all_game_data[$i]);
 
+	//printf($player_i[0] . $player_i[1] . $player_i[2]);
 	$fn = $player_i[0];
 	$ln = $player_i[1];
 	$tn = $player_i[2];
@@ -40,17 +41,43 @@ for($i = 0; $i < $length - 1; $i++){
 	<br>
 	<?php
 	
-	printf("%d insert player %s %s  ", $i, $player_i[0], $player_i[1]);
+	//printf("%d insert player %s %s  ", $i, $player_i[0], $player_i[1]);
 	$result = player::insert($player_i[0], $player_i[1], $player_i[2]);
+	
+	$player_id = $result->player_id;
+	$first_name = $result->first_name;
+	$last_name = $result->last_name;
+	printf("insert Player " . "$player_id: " . "$first_name". " and ". "$last_name". " succeeded!");
+	
 	if(count($player_i) == 8){
 		
 	?>
 	<br>
 	<?php
-		printf("%d insert Passing player %s %s ", $i, $player_i[6], $player_i[7]);
+		//printf("%d insert Passing player %s %s ", $i, $player_i[6], $player_i[7]);
 		$result = player::insert($player_i[6], $player_i[7], $player_i[2]);
+		
+		$player_id = $result->player_id;
+		$first_name = $result->first_name;
+		$last_name = $result->last_name;
+		printf("insert Player " . "$player_id: " . "$first_name". " and ". "$last_name". " succeeded!");
 	}
 }
-
+?>
+<br>
+<?php
+	// $exist = $conn->query("select * from Player p where ");
+	// if($exist){
+	// 	$next_row = $exist->fetch_assoc();
+	// 	printf($next_row["first_name"]);
+	// 	printf(count($next_row));
+	// }
+	// if($exist->num_rows != 0) continue;
+		
+	// 	continue;
+	// }else{
+	// 	printf($player_i[0] . $player_i[1] . $player_i[2]);
+	// 	printf("YES");
+	// }
 ?>
 

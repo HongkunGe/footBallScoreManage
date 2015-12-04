@@ -30,6 +30,7 @@ $all_game_data = explode("\n", $all_game_data);
 $length = count($all_game_data);
 
 $game_i =  explode(" ", $all_game_data[0]);
+
 $team_before = [$game_i[2] => 0, $game_i[3] => 0, $game_i[4]];
 
 for($i = 0; $i < $length; $i++){
@@ -63,21 +64,28 @@ for($i = 0; $i < $length; $i++){
 			$winner = [$key2 => $score2]; $loser = [$key1 => $score1];
 		}
 		$result = game::insert(key($winner), key($loser), current($winner), current($loser), $team_before[0]);
-		var_dump($result);
-		
+		// var_dump($result);
+		$result = (array)$result;
+		$game_id = $result["game_id"];
+		$team1 = $result["Team1"];
+		$team2 = $result["Team2"];
+		printf("insert Game " . "$game_id: " . "$team1". " and ". "$team2". " succeeded!");
 		?>
 		<br>
 		<?php	
 		
-		unset($team_before);
-		$team_before = [$game_i[2] => 0, $game_i[3] => 0, $game_i[4]];
-		
-		if($game_i[5] == "fieldgoal"){
-			$team_before[$game_i[2]] += 3;
-		}else if($game_i[5] == "passing"){
-			$team_before[$game_i[2]] += 7;
-		}else if($game_i[5] == "rushing"){
-			$team_before[$game_i[2]] += 7;
+		// start to store the new game. Skip the last empty $game_i
+		if(count($game_i) > 1){
+			unset($team_before);
+			$team_before = [$game_i[2] => 0, $game_i[3] => 0, $game_i[4]];
+			
+			if($game_i[5] == "fieldgoal"){
+				$team_before[$game_i[2]] += 3;
+			}else if($game_i[5] == "passing"){
+				$team_before[$game_i[2]] += 7;
+			}else if($game_i[5] == "rushing"){
+				$team_before[$game_i[2]] += 7;
+			}
 		}
 	}
 	
