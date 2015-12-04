@@ -2,13 +2,13 @@
 	
 	
 class event{
-	private $event_id;
-	private $player_id;
-	private $game_id;
-	private $rushing;
-	private $passing;
-	private $fieldgoal;
-	private $passTo;
+	public $event_id;
+	public $player_id;
+	public $game_id;
+	public $rushing;
+	public $passing;
+	public $fieldgoal;
+	public $passTo;
 	
 	private function __construct($event_id, $player_id, $game_id, $rushing, $passing, $fieldgoal, $passTo){
 		$this->event_id = $event_id;

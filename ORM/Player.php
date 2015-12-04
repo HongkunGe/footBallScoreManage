@@ -4,10 +4,10 @@ error_reporting(E_ALL);
 
 	
 class player{
-	private $player_id;
-	private $first_name;
-	private $last_name;
-	private $team_name;
+	public $player_id;
+	public $first_name;
+	public $last_name;
+	public $team_name;
 	
 	private function __construct($player_id, $first_name, $last_name, $team_name){
 		$this->player_id = $player_id;
