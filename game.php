@@ -3,9 +3,9 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once('../A3/ORM/Game.php');
-require_once('../A3/ORM/Event.php');
-require_once('../A3/ORM/Player.php');
+require_once('../ORM/Game.php');
+require_once('../ORM/Event.php');
+require_once('../ORM/Player.php');
 
 $path_components = explode('/', $_SERVER['PATH_INFO']);
 
